@@ -16,17 +16,17 @@ jobs:
     steps:
     # Clonado del repositorio
     - uses: actions/checkout@v3
-    
+
     # Comandos para instalación de dependencias y ejecución de tests
     - name: Instalación de dependencias y tests
       run: |
         npm install
         npm run test
-    
+
     # Comando para generar el archivo zip de la aplicación. Se excluye la carpeta de librerías 'node_modules' porque se instalará en la plataforma Beanstalk al desplegarse
     - name: Generar archivo zip con el código de la aplicación
       run: zip -r deploy.zip * -x "**node_modules**"
-      
+
     # Despliegue mediante la acción 'Beanstalk deploy' (https://github.com/marketplace/actions/beanstalk-deploy)
     - name: Despliegue en AWS Beanstalk
       uses: einaregilsson/beanstalk-deploy@v21
@@ -40,9 +40,9 @@ jobs:
         # AWS Region
         region: us-east-1
         # Nombre de la aplicación creada en Beanstalk
-        application_name: testactions
+        application_name: AplicacionManuelAlonso
         # Nombre del entorno creado en Beanstalk
-        environment_name: Testactions-env
+        environment_name: AplicacionManuelAlonso-env
         # Nombre de la versión a crear en Beanstalk
         version_label: v1.0
         # Archivo con el código de la aplicación (generado en el paso anterior)
